@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,10 +49,13 @@ class MyWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new WebviewScaffold(
-      url: url,
-      appBar: new AppBar(
-        title: new Text("Webview"),
+    return Scaffold(
+      appBar: AppBar(
+        title: new Text("WebView"),
+      ),
+      body: WebView(
+        initialUrl: url,
+        javaScriptMode: JavaScriptMode.unrestricted,
       ),
     );
   }
