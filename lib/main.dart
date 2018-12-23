@@ -11,8 +11,32 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyWebView(
-          url: "https://www.google.com",
+      routes: {
+        '/': (_) => const HomeView(),
+        '/webview': (_) => MyWebView(
+              url: "https://www.google.com",
+            ),
+      },
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: new Text("Home"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed("/webview");
+          },
+          child: Text('push to webview'),
+        ),
       ),
     );
   }
