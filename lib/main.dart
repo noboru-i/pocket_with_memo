@@ -53,9 +53,29 @@ class MyWebView extends StatelessWidget {
       appBar: AppBar(
         title: new Text("WebView"),
       ),
-      body: WebView(
-        initialUrl: url,
-        javaScriptMode: JavaScriptMode.unrestricted,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          WebView(
+            initialUrl: url,
+            javaScriptMode: JavaScriptMode.unrestricted,
+          ),
+          Positioned(
+            left: 0.0,
+            top: 0.0,
+            right: 100.0,
+            bottom: 0.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white70,
+              ),
+              child: TextField(
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
