@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Web with Memo',
+      title: 'Pocket with Memo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

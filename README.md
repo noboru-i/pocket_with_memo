@@ -1,6 +1,6 @@
-# Web with Memo
+# Pocket with Memo
 
-Create memo with web page.
+Create memo with Pocket.
 
 ## Getting Started
 
