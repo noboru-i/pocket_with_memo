@@ -54,12 +54,6 @@ class MyWebView extends StatelessWidget {
       appBar: new AppBar(
         title: new Text("Webview"),
       ),
-      initialChild: Container(
-        color: Colors.redAccent,
-        child: const Center(
-          child: Text('Waiting.....'),
-        ),
-      ),
     );
   }
 }
