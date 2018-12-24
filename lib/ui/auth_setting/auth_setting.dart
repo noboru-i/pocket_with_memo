@@ -15,7 +15,11 @@ class AuthSettingView extends StatelessWidget {
           onPressed: () async {
             var client = PocketClient();
             RequestToken response = await client.fetchRequestToken();
-            print("code = " + response.code);
+            print("code = ${response.code}");
+            await client.startOauthScreen(response.code);
+            AccessToken accessToken =
+                await client.fetchAccessToken(response.code);
+            print("accessToken = ${accessToken.accessToken}");
           },
           child: Text('authorize'),
         ),
