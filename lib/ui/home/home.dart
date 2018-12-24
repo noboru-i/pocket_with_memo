@@ -10,11 +10,21 @@ class HomeView extends StatelessWidget {
         title: new Text("Home"),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed("/webview");
-          },
-          child: Text('push to webview'),
+        child: Column(
+          children: [
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/list");
+              },
+              child: Text('push to list'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/webview");
+              },
+              child: Text('push to webview'),
+            ),
+          ],
         ),
       ),
     );
