@@ -1,12 +1,22 @@
 class Image {
-  const Image(
+  const Image({
     this.itemId,
     this.src,
-  );
+    this.width,
+    this.height,
+  });
 
   final int itemId;
   final String src;
-  // TODO use after fetching from API.
-//  private int width;
-//  private int height;
+  final int width;
+  final int height;
+
+  factory Image.fromJson(Map<String, dynamic> json) {
+    return Image(
+      itemId: int.parse(json['item_id']),
+      src: json['src'],
+      width: int.parse(json['width']),
+      height: int.parse(json['height']),
+    );
+  }
 }

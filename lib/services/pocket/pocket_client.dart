@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:pocket_with_memo/secret.dart';
+import 'package:pocket_with_memo/services/pocket/models/item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PocketClient {
@@ -51,6 +52,25 @@ class PocketClient {
     // TODO we need to check response is success.
     return AccessToken.fromJson(json.decode(response.body));
   }
+
+  Future<List<Item>> fetchItems(String accessToken) async {
+    final http.Response response = await http.post(
+      "$apiUrl/get",
+      headers: {},
+      body: {
+        "consumer_key": Secret.pocketConsumerKey,
+        "access_token": accessToken,
+        "count": "10",
+        "detailType": "complete",
+      },
+    );
+    print(response.body);
+    // TODO check error response
+    return (json.decode(response.body)['list'] as Map)
+        .values
+        .map((data) => new Item.fromJson(data))
+        .toList();
+  }
 }
 
 Future<Stream<String>> _server() async {
@@ -94,6 +114,8 @@ class AccessToken {
 
   factory AccessToken.fromJson(Map<String, dynamic> json) {
     return AccessToken(
-        accessToken: json['access_token'], userName: json['username']);
+      accessToken: json['access_token'],
+      userName: json['username'],
+    );
   }
 }

@@ -13,7 +13,8 @@ class PageItemView extends StatelessWidget {
         children: [
           Container(
             height: 120,
-            child: Image.network(
+            // TODO how to show blank?
+            child: item.image == null ? Text("") : Image.network(
               item.image.src,
             ),
           ),

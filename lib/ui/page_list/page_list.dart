@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_with_memo/services/pocket/models/item.dart';
+import 'package:pocket_with_memo/services/pocket/pocket_client.dart';
 import 'package:pocket_with_memo/ui/page_list/page_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PageListView extends StatefulWidget {
   @override
@@ -12,13 +14,10 @@ class _PageListView extends State<PageListView> {
 
   @override
   void initState() {
-    // TODO dummy data.
-    items = [
-      Item.createDummy(0),
-      Item.createDummy(1),
-      Item.createDummy(2),
-    ];
+    items = [];
     super.initState();
+
+    fetchList().then((List<Item> items) => setItems(items));
   }
 
   @override
@@ -38,5 +37,17 @@ class _PageListView extends State<PageListView> {
         },
       ),
     );
+  }
+
+  Future<List<Item>> fetchList() async {
+    print("fetchList");
+    final prefs = await SharedPreferences.getInstance();
+    return await PocketClient().fetchItems(prefs.getString("pocket_access_token"));
+  }
+
+  void setItems(List<Item> items) {
+    setState(() {
+      this.items = items;
+    });
   }
 }
