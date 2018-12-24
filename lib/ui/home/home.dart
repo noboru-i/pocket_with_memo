@@ -14,6 +14,12 @@ class HomeView extends StatelessWidget {
           children: [
             RaisedButton(
               onPressed: () {
+                Navigator.of(context).pushNamed("/auth_setting");
+              },
+              child: Text('push to auth setting'),
+            ),
+            RaisedButton(
+              onPressed: () {
                 Navigator.of(context).pushNamed("/list");
               },
               child: Text('push to list'),
