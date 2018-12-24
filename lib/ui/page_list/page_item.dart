@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_with_memo/models/item.dart';
+import 'package:pocket_with_memo/services/pocket/models/item.dart';
 
 class PageItemView extends StatelessWidget {
   PageItemView(this.item);

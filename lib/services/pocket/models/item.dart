@@ -1,4 +1,4 @@
-import 'package:pocket_with_memo/models/image.dart';
+import 'package:pocket_with_memo/services/pocket/models/image.dart';
 
 class Item {
   const Item(

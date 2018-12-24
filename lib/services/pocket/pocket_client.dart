@@ -7,13 +7,12 @@ import 'package:pocket_with_memo/secret.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PocketClient {
-  static const oauthUrl = "https://getpocket.com/v3/oauth/request";
+  static const apiUrl = "https://getpocket.com/v3";
   static const webAuthorizeUrl = "https://getpocket.com/auth/authorize";
-  static const apiAuthorizeUrl = "https://getpocket.com/v3/oauth/authorize";
 
   Future<RequestToken> fetchRequestToken() async {
     final http.Response response = await http.post(
-      oauthUrl,
+      "$apiUrl/oauth/request",
       headers: {
         "X-Accept": "application/json",
       },
@@ -39,7 +38,7 @@ class PocketClient {
 
   Future<AccessToken> fetchAccessToken(String code) async {
     final http.Response response = await http.post(
-      apiAuthorizeUrl,
+      "$apiUrl/oauth/authorize",
       headers: {
         "X-Accept": "application/json",
       },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_with_memo/models/item.dart';
+import 'package:pocket_with_memo/services/pocket/models/item.dart';
 import 'package:pocket_with_memo/ui/page_list/page_item.dart';
 
 class PageListView extends StatefulWidget {
