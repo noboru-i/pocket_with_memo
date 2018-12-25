@@ -18,6 +18,7 @@ class Item {
     this.sortId,
     // this.tags,
     this.image,
+    this.topImageUrl,
   });
 
   final int itemId;
@@ -34,17 +35,19 @@ class Item {
   final int hasVideo;
   final int wordCount;
   final int sortId;
+
 //  private Set<String> tags;
   final Image image;
+  final String topImageUrl;
 
   String get title {
-    // TODO given or resolved
-    return givenTitle;
+    return resolvedTitle.length != 0 ? resolvedTitle : givenTitle;
   }
 
   factory Item.fromJson(Map<String, dynamic> json) {
     final Map<String, dynamic> images = json['images'] ?? {};
-    final Image image = images['1'] == null ? null : Image.fromJson(images['1']);
+    final Image image =
+        images['1'] == null ? null : Image.fromJson(images['1']);
     print(json);
     return Item(
       itemId: int.parse(json['item_id']),
@@ -62,6 +65,7 @@ class Item {
       wordCount: int.parse(json['word_count']),
       sortId: json['sort_id'],
       image: image,
+      topImageUrl: json['top_image_url'],
     );
   }
 }
