@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_with_memo/bloc/articles_provider.dart';
 import 'package:pocket_with_memo/services/pocket/models/item.dart';
-import 'package:pocket_with_memo/services/pocket/pocket_client.dart';
 import 'package:pocket_with_memo/ui/page_list/page_item.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PageListView extends StatefulWidget {
   @override
@@ -10,44 +9,36 @@ class PageListView extends StatefulWidget {
 }
 
 class _PageListView extends State<PageListView> {
-  List<Item> items;
 
   @override
   void initState() {
-    items = [];
     super.initState();
 
-    fetchList().then((List<Item> items) => setItems(items));
+    final articlesBloc = ArticlesProvider.of(context);
+    articlesBloc.load.add(0);
   }
 
   @override
   Widget build(BuildContext context) {
-    int length = items?.length ?? 0;
+    final articlesBloc = ArticlesProvider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: new Text("Page List"),
       ),
-      body: new ListView.builder(
-        itemCount: length,
-        itemBuilder: (BuildContext context, int index) {
-          if (length < index) {
-            return null;
-          }
-          return PageItemView(items[index]);
-        },
+      body: StreamBuilder<List<Item>>(
+        stream: articlesBloc.list,
+        initialData: [],
+        builder: (context, snapshot) => ListView.builder(
+          itemCount: snapshot.data.length,
+          itemBuilder: (BuildContext context, int index) {
+            if (snapshot.data.length < index) {
+              return null;
+            }
+            return PageItemView(snapshot.data[index]);
+          },
+        ),
       ),
     );
-  }
-
-  Future<List<Item>> fetchList() async {
-    print("fetchList");
-    final prefs = await SharedPreferences.getInstance();
-    return await PocketClient().fetchItems(prefs.getString("pocket_access_token"));
-  }
-
-  void setItems(List<Item> items) {
-    setState(() {
-      this.items = items;
-    });
   }
 }
